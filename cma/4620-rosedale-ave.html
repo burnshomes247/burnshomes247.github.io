@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CMA — 4620 Rosedale Ave, Bethesda MD</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: #F7F4EF; color: #1A1A18; font-size: 14px; line-height: 1.6; }
+
+  .header { background: #1A1A18; color: #fff; padding: 44px 56px 36px; }
+  .header-eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #B8963E; font-weight: 500; margin-bottom: 10px; }
+  .header h1 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 500; margin-bottom: 4px; }
+  .header-sub { font-size: 14px; color: rgba(255,255,255,0.45); margin-bottom: 28px; }
+  .header-meta { display: flex; gap: 36px; flex-wrap: wrap; }
+  .meta-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.35); display: block; margin-bottom: 3px; }
+  .meta-value { font-size: 13px; color: rgba(255,255,255,0.75); }
+  .header-agent { margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .agent-name { font-family: 'Playfair Display', serif; font-size: 15px; color: rgba(255,255,255,0.7); }
+  .agent-contact { font-size: 12px; color: rgba(255,255,255,0.35); }
+  .agent-contact a { color: rgba(255,255,255,0.35); text-decoration: none; }
+
+  .main { padding: 44px 56px; max-width: 1100px; margin: 0 auto; }
+
+  .section-eye { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #B8963E; font-weight: 500; margin-bottom: 14px; }
+
+  /* CARD GRID */
+  .card-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-bottom: 40px; }
+
+  .card { background: #fff; border: 0.5px solid #E0DDD5; border-radius: 12px; padding: 18px 20px; display: flex; flex-direction: column; gap: 0; }
+  .card.subject { border: 2px solid #185FA5; }
+  .card.faded { opacity: 0.65; }
+
+  .pill { display: inline-block; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; padding: 3px 9px; border-radius: 4px; margin-bottom: 12px; color: #fff; }
+  .pill-blue { background: #185FA5; }
+  .pill-green { background: #3B6D11; }
+  .pill-red { background: #A32D2D; }
+
+  .card-addr { font-size: 15px; font-weight: 500; color: #1A1A18; margin-bottom: 2px; }
+  .card-city { font-size: 12px; color: #8A8A82; margin-bottom: 14px; }
+  .card-price { font-size: 22px; font-weight: 500; color: #1A1A18; margin-bottom: 3px; }
+  .card-psf { font-size: 11px; color: #8A8A82; margin-bottom: 14px; }
+
+  .card-rows { border-top: 0.5px solid #E0DDD5; padding-top: 12px; display: flex; flex-direction: column; gap: 7px; margin-bottom: 14px; }
+  .card-row { display: flex; justify-content: space-between; }
+  .row-label { font-size: 12px; color: #8A8A82; }
+  .row-val { font-size: 12px; font-weight: 500; color: #1A1A18; }
+
+  .card-note { border-radius: 4px; padding: 8px 10px; font-size: 11px; line-height: 1.5; margin-top: auto; }
+  .note-blue { background: #E6F1FB; color: #0C447C; }
+  .note-green { background: #EAF3DE; color: #27500A; }
+  .note-red { background: #FCEBEB; color: #791F1F; }
+
+  /* ANALYSIS */
+  .analysis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 40px; }
+  .analysis-card { background: #fff; border: 0.5px solid #E0DDD5; border-radius: 12px; padding: 22px 24px; }
+  .analysis-card h3 { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 500; color: #1A1A18; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 0.5px solid #E0DDD5; }
+  .range-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 16px; }
+  .range-val { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 500; color: #1A1A18; }
+  .range-dash { color: #8A8A82; font-size: 16px; }
+  .range-sub { font-size: 11px; color: #8A8A82; margin-top: 2px; }
+  .bullet-list { display: flex; flex-direction: column; gap: 7px; }
+  .bullet-list li { display: flex; gap: 8px; font-size: 12px; color: #4A4A45; line-height: 1.5; list-style: none; }
+  .bullet-list li::before { content: '—'; color: #B8963E; flex-shrink: 0; }
+
+  .dark-card { background: #1A1A18; border-radius: 12px; padding: 22px 24px; }
+  .dark-card h3 { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 500; color: #B8963E; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .dark-row { display: flex; justify-content: space-between; align-items: baseline; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12px; }
+  .dark-row:last-child { border-bottom: none; }
+  .dark-label { color: rgba(255,255,255,0.45); }
+  .dark-val { color: rgba(255,255,255,0.8); font-weight: 500; }
+  .dark-val.gold { color: #B8963E; font-family: 'Playfair Display', serif; font-size: 16px; }
+
+  .footer { background: #1A1A18; padding: 28px 56px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer-name { font-family: 'Playfair Display', serif; font-size: 15px; color: rgba(255,255,255,0.7); margin-bottom: 3px; }
+  .footer-title { font-size: 11px; color: rgba(255,255,255,0.35); }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a { font-size: 12px; color: rgba(255,255,255,0.4); text-decoration: none; }
+  .footer-links a:hover { color: #B8963E; }
+  .footer-disc { width: 100%; font-size: 10px; color: rgba(255,255,255,0.2); line-height: 1.6; border-top: 1px solid rgba(255,255,255,0.07); padding-top: 14px; margin-top: 4px; }
+
+  @media (max-width: 860px) {
+    .header, .main, .footer { padding-left: 24px; padding-right: 24px; }
+    .card-grid { grid-template-columns: 1fr 1fr; }
+    .analysis-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) {
+    .card-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-eyebrow">Comparative Market Analysis</div>
+  <h1>4620 Rosedale Avenue</h1>
+  <div class="header-sub">Bethesda, Maryland 20814 &nbsp;·&nbsp; Rosedale Park</div>
+  <div class="header-meta">
+    <div>
+      <span class="meta-label">Prepared for</span>
+      <span class="meta-value">Ed — Rosedale Avenue LLC</span>
+    </div>
+    <div>
+      <span class="meta-label">Date</span>
+      <span class="meta-value">March 28, 2026</span>
+    </div>
+    <div>
+      <span class="meta-label">Market</span>
+      <span class="meta-value">East Bethesda / 20814</span>
+    </div>
+    <div>
+      <span class="meta-label">Purpose</span>
+      <span class="meta-value">Valuation &amp; 1031 Exchange Planning</span>
+    </div>
+  </div>
+  <div class="header-agent">
+    <div>
+      <div class="agent-name">Mike Burns &nbsp;·&nbsp; RE/MAX Allegiance</div>
+      <div class="agent-contact"><a href="tel:7034032022">(703) 403-2022</a> &nbsp;·&nbsp; <a href="mailto:mike@burnshomes.com">mike@burnshomes.com</a> &nbsp;·&nbsp; <a href="https://burnshomes.com">burnshomes.com</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="section-eye">Subject property &amp; comparable sales</div>
+
+  <div class="card-grid">
+
+    <div class="card subject">
+      <span class="pill pill-blue">Subject</span>
+      <div class="card-addr">4620 Rosedale Ave</div>
+      <div class="card-city">Bethesda, MD 20814</div>
+      <div class="card-price">—</div>
+      <div class="card-psf">No recent sale</div>
+      <div class="card-rows">
+        <div class="card-row"><span class="row-label">Lot</span><span class="row-val">4,800 SF</span></div>
+        <div class="card-row"><span class="row-label">Above grade</span><span class="row-val">1,386 SF</span></div>
+        <div class="card-row"><span class="row-label">Total finished</span><span class="row-val">~1,975 SF</span></div>
+        <div class="card-row"><span class="row-label">Beds / baths</span><span class="row-val">4 BD / 3 BA</span></div>
+        <div class="card-row"><span class="row-label">Year built</span><span class="row-val">1933</span></div>
+      </div>
+      <div class="card-note note-blue">Teardown candidate · R-60 zoning · owned by Rosedale Ave LLC</div>
+    </div>
+
+    <div class="card">
+      <span class="pill pill-green">Best comp · Apr 2025</span>
+      <div class="card-addr">4619 Rosedale Ave</div>
+      <div class="card-city">Same street · 1 block</div>
+      <div class="card-price">$1,030,000</div>
+      <div class="card-psf">$990 / SF above grade · 5 DOM</div>
+      <div class="card-rows">
+        <div class="card-row"><span class="row-label">Lot</span><span class="row-val">4,800 SF</span></div>
+        <div class="card-row"><span class="row-label">Above grade</span><span class="row-val">1,040 SF</span></div>
+        <div class="card-row"><span class="row-label">Total finished</span><span class="row-val">1,430 SF</span></div>
+        <div class="card-row"><span class="row-label">Beds / baths</span><span class="row-val">2 BD / 1.5 BA</span></div>
+        <div class="card-row"><span class="row-label">Year built</span><span class="row-val">1934</span></div>
+      </div>
+      <div class="card-note note-green">Sold renovated / retail · identical lot · conventional financing</div>
+    </div>
+
+    <div class="card">
+      <span class="pill pill-green">Comp 2 · May 2024</span>
+      <div class="card-addr">4601 Chestnut St</div>
+      <div class="card-city">1 block off Rosedale</div>
+      <div class="card-price">$1,120,000</div>
+      <div class="card-psf">$945 / SF above grade · 4 DOM</div>
+      <div class="card-rows">
+        <div class="card-row"><span class="row-label">Lot</span><span class="row-val">4,800 SF</span></div>
+        <div class="card-row"><span class="row-label">Above grade</span><span class="row-val">1,185 SF</span></div>
+        <div class="card-row"><span class="row-label">Total finished</span><span class="row-val">1,750 SF</span></div>
+        <div class="card-row"><span class="row-label">Beds / baths</span><span class="row-val">3 BD / 3 BA</span></div>
+        <div class="card-row"><span class="row-label">Year built</span><span class="row-val">1939</span></div>
+      </div>
+      <div class="card-note note-green">Excellent condition · sold $145K over ask · conventional financing</div>
+    </div>
+
+    <div class="card faded">
+      <span class="pill pill-red">Least similar · Dec 2025</span>
+      <div class="card-addr">4701 Rosedale Ave</div>
+      <div class="card-city">Same street · 1 block north</div>
+      <div class="card-price">$1,238,000</div>
+      <div class="card-psf">$499 / SF above grade · 17 DOM</div>
+      <div class="card-rows">
+        <div class="card-row"><span class="row-label">Lot</span><span class="row-val">4,800 SF</span></div>
+        <div class="card-row"><span class="row-label">Above grade</span><span class="row-val">2,481 SF</span></div>
+        <div class="card-row"><span class="row-label">Total finished</span><span class="row-val">2,959 SF</span></div>
+        <div class="card-row"><span class="row-label">Beds / baths</span><span class="row-val">3 BD / 3.5 BA</span></div>
+        <div class="card-row"><span class="row-label">Year built</span><span class="row-val">1934</span></div>
+      </div>
+      <div class="card-note note-red">Much larger · includes ADU / carriage house · cash sale</div>
+    </div>
+
+  </div>
+
+  <div class="section-eye">Value analysis</div>
+
+  <div class="analysis-grid">
+
+    <div class="analysis-card">
+      <h3>Retail value range (renovated / livable)</h3>
+      <div class="range-row">
+        <div><div class="range-val">$980,000</div><div class="range-sub">Low</div></div>
+        <div class="range-dash">–</div>
+        <div><div class="range-val">$1,120,000</div><div class="range-sub">High</div></div>
+      </div>
+      <ul class="bullet-list">
+        <li>Comps 1 &amp; 2 bracket this range on identical 4,800 SF lots</li>
+        <li>Both sold in 4–5 days — strong demand in this submarket</li>
+        <li>Subject has more SF than comps but is in significantly worse condition</li>
+        <li>County 2026 land assessment alone is $634,500 — land dominates value here</li>
+      </ul>
+    </div>
+
+    <div class="dark-card">
+      <h3>Builder / teardown context</h3>
+      <div class="dark-row"><span class="dark-label">4529 Rosedale — Douglas new build (same lot size)</span><span class="dark-val">Listed $2,150,000</span></div>
+      <div class="dark-row"><span class="dark-label">4512 Maple — Douglas teardown purchase (Jul 2025)</span><span class="dark-val">$1,125,000</span></div>
+      <div class="dark-row"><span class="dark-label">4512 Maple — Douglas new build list price</span><span class="dark-val">$2,499,000</span></div>
+      <div class="dark-row"><span class="dark-label">4408 Maple — teardown purchased (Dec 2022)</span><span class="dark-val">$899,000</span></div>
+      <div class="dark-row" style="padding-top: 14px; margin-top: 6px; border-top: 1px solid rgba(255,255,255,0.12); border-bottom: none;">
+        <span class="dark-label" style="color: rgba(255,255,255,0.65);">Estimated teardown value range</span>
+        <span class="dark-val gold">$900K – $1,050,000</span>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="footer">
+  <div>
+    <div class="footer-name">Mike Burns &nbsp;·&nbsp; RE/MAX Allegiance</div>
+    <div class="footer-title">Licensed Realtor · DMV Market · (703) 403-2022</div>
+  </div>
+  <div class="footer-links">
+    <a href="tel:7034032022">(703) 403-2022</a>
+    <a href="mailto:mike@burnshomes.com">mike@burnshomes.com</a>
+    <a href="https://burnshomes.com" target="_blank">burnshomes.com</a>
+  </div>
+  <div class="footer-disc">
+    All square footage, assessment data, and sale prices sourced from BRIGHT MLS and Montgomery County public records. Deemed reliable but not guaranteed. This analysis is for informational purposes only and does not constitute a formal appraisal. Data current as of March 28, 2026.
+  </div>
+</div>
+
+</body>
+</html>
